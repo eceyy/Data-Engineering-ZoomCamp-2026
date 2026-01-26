@@ -1,11 +1,6 @@
 # Data-Engineering-ZoomCamp-2026
 
-## Syllabus Overview
-
-The course consists of structured modules, hands-on workshops, and a final project to reinforce your learning.
-
 ---
-
 
 ## Modules
 
