@@ -1,7 +1,5 @@
 # Module 1 – Homework
 
-This document contains answers and SQL queries for the Module 1 homework.
-
 ---
 
 ## Question 1
