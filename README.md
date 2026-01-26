@@ -4,7 +4,7 @@
 
 ## Modules
 
-### Module 1: Containerization and Infrastructure as Code ([https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform])
+### Module 1: Containerization and Infrastructure as Code **[https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/01-docker-terraform]**
 
 * Introduction to GCP
 * Docker and Docker Compose
