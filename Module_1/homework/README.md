@@ -60,16 +60,6 @@ volumes:
 
 ---
 
-## Why Not the Other Options?
-
-- ❌ `postgres:5433` - Wrong hostname (should be service name `db`) and wrong port
-- ❌ `localhost:5432` - `localhost` refers to the container itself, not the Postgres service
-- ❌ `db:5433` - Wrong port (5433 is the host port, not container port)
-- ❌ `postgres:5432` - Wrong hostname (container name doesn't work for service discovery, use service name `db`)
-- ✅ `db:5432` - **Correct!** Uses service name and internal container port
-
----
-
 ## Question 3
 
 **For the trips in November 2025, how many trips had a trip_distance of less than or equal to 1 mile?**
