@@ -1,6 +1,6 @@
 # Docker and PostgreSQL: Data Engineering Workshop
 
-* Video: **link**
+* Video: **[link](https://www.youtube.com/watch?v=lP8xXebHmuE)**
 * Slides: **link**
 * Code: **pipeline/**
 
@@ -32,3 +32,4 @@ In this workshop, we will explore Docker fundamentals and data engineering workf
 9. **Docker Compose** - Multi-container orchestration
 10. **SQL Refresher** - SQL joins, aggregations, and queries
 11. **Cleanup** - Cleaning up Docker resources
+
