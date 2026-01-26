@@ -17,13 +17,90 @@ docker run --rm python:3.13 pip --version
 
 ## Question 2
 
-**Given the docker-compose.yaml, what is the hostname and port that pgAdmin should use to connect to the Postgres database?**
+Given the following `docker-compose.yaml`, what is the `hostname` and `port` that pgAdmin should use to connect to the Postgres database?
+```yaml
+services:
+  db:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'ny_taxi'
+    ports:
+      - '5433:5432'
+    volumes:
+      - vol-pgdata:/var/lib/postgresql/data
 
-### Explanation
-Inside Docker Compose, services communicate using the service name as hostname and the container port, not the exposed port.
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@pgadmin.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin"
+    ports:
+      - "8080:80"
+    volumes:
+      - vol-pgadmin_data:/var/lib/pgadmin
 
-- Postgres service name: `db`
-- Postgres container port: `5432`
+volumes:
+  vol-pgdata:
+    name: vol-pgdata
+  vol-pgadmin_data:
+    name: vol-pgadmin_data
+```
+
+## Options
+
+* `postgres:5433`
+* `localhost:5432`
+* `db:5433`
+* `postgres:5432`
+* `db:5432`
+
+---
+
+
+---
+
+## Explanation
+
+When containers communicate with each other within the same Docker Compose network, they use:
+
+1. **Hostname**: The service name defined in the `docker-compose.yaml` (in this case, `db`)
+2. **Port**: The internal container port, NOT the exposed host port (in this case, `5432`)
+
+### Key Points:
+
+- The Postgres service is named **`db`** in the compose file
+- The port mapping is `'5433:5432'`, which means:
+  - `5433` is the port on your **host machine** (localhost)
+  - `5432` is the port **inside the container**
+- pgAdmin runs in the same Docker network and connects to the **internal** container port
+
+### Port Mapping Breakdown:
+```
+ports:
+  - '5433:5432'
+    ↑       ↑
+    |       └─── Container port (what pgAdmin uses)
+    └─────────── Host port (what you use from your machine)
+```
+
+### Connection Details:
+
+- **Hostname**: `db`
+- **Port**: `5432`
+
+---
+
+## Why Not the Other Options?
+
+- ❌ `postgres:5433` - Wrong hostname (should be service name `db`) and wrong port
+- ❌ `localhost:5432` - `localhost` refers to the container itself, not the Postgres service
+- ❌ `db:5433` - Wrong port (5433 is the host port, not container port)
+- ❌ `postgres:5432` - Wrong hostname (container name doesn't work for service discovery, use service name `db`)
+- ✅ `db:5432` - **Correct!** Uses service name and internal container port
 
 ---
 
