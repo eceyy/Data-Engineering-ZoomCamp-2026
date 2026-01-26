@@ -60,40 +60,6 @@ volumes:
 
 ---
 
-
----
-
-## Explanation
-
-When containers communicate with each other within the same Docker Compose network, they use:
-
-1. **Hostname**: The service name defined in the `docker-compose.yaml` (in this case, `db`)
-2. **Port**: The internal container port, NOT the exposed host port (in this case, `5432`)
-
-### Key Points:
-
-- The Postgres service is named **`db`** in the compose file
-- The port mapping is `'5433:5432'`, which means:
-  - `5433` is the port on your **host machine** (localhost)
-  - `5432` is the port **inside the container**
-- pgAdmin runs in the same Docker network and connects to the **internal** container port
-
-### Port Mapping Breakdown:
-```
-ports:
-  - '5433:5432'
-    ↑       ↑
-    |       └─── Container port (what pgAdmin uses)
-    └─────────── Host port (what you use from your machine)
-```
-
-### Connection Details:
-
-- **Hostname**: `db`
-- **Port**: `5432`
-
----
-
 ## Why Not the Other Options?
 
 - ❌ `postgres:5433` - Wrong hostname (should be service name `db`) and wrong port
