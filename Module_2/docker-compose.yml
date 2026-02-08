@@ -1,35 +1,36 @@
-kestra_postgres_data:
+volumes:
+  ny_taxi_postgres_data:
     driver: local
-kestra_data:
+  kestra_postgres_data:
+    driver: local
+  kestra_data:
     driver: local
 
 services:
   pgdatabase:
     image: postgres:18
     environment:
-      POSTGRES_USER: "root"
-      POSTGRES_PASSWORD: "root"
-      POSTGRES_DB: "ny_taxi"
-    volumes:
-      - ny_taxi_postgres_data:/var/lib/postgresql
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ny_taxi
     ports:
       - "5432:5432"
+    volumes:
+      - ny_taxi_postgres_data:/var/lib/postgresql
+    depends_on:
+      kestra:
+        condition: service_started
 
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - "8085:80"
-
-
-
-volumes:
-  ny_taxi_postgres_data:
-  pgadmin_data:
+    depends_on:
+      pgdatabase:
+        condition: service_started
 
   kestra_postgres:
     image: postgres:18
