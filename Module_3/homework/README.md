@@ -1,4 +1,4 @@
-## 📊 Dataset
+## Dataset
 
 **Source:** [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 
@@ -20,7 +20,7 @@ SELECT *
 FROM `case-study-53427.zoomcamp.yellow_taxi_external_table`;
 ```
 
-## 📝 Questions & Solutions
+## Questions & Solutions
 
 ### Question 1: 
 **What is the count of records for the 2024 Yellow Taxi Data?**
